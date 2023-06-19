@@ -30,43 +30,6 @@ class App extends Component {
     this.state = initialState;
   }
 
-  clarifaiRequestOptions = (imageUrl) => {
-    // Your PAT (Personal Access Token) can be found in the portal under Authentification
-    const PAT = "fe6f0c8fe0d14716b3e1b117a5fd0f37";
-    // Specify the correct user_id/app_id pairings
-    // Since you're making inferences outside your app's scope
-    const USER_ID = "rowja49k8e35";
-    const APP_ID = "smartBrain";
-    // Change these to whatever model and image URL you want to use
-    const MODEL_ID = "face-detection";
-    const IMAGE_URL = imageUrl;
-
-    const raw = JSON.stringify({
-      user_app_id: {
-        user_id: USER_ID,
-        app_id: APP_ID,
-      },
-      inputs: [
-        {
-          data: {
-            image: {
-              url: IMAGE_URL,
-            },
-          },
-        },
-      ],
-    });
-
-    return {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: "Key " + PAT,
-      },
-      body: raw,
-    };
-  };
-
   loadUser = (data) => {
     this.setState({
       user: {
@@ -109,10 +72,13 @@ class App extends Component {
     // for the Face Detect Mode: https://www.clarifai.com/models/face-detection
     // If that isn't working, then that means you will have to wait until their servers are back up.
 
-    fetch(
-      "https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs",
-      this.clarifaiRequestOptions(this.state.input)
-    )
+    fetch("http://localhost:5000/imageurl", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: this.state.input,
+      }),
+    })
       .then((response) => response.json())
       .then((response) => {
         console.log("API", response);
