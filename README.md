@@ -1,11 +1,7 @@
 # SmartBrain - v1
-Final project for ZTM course
+Full Stack project that enables to detect faces in uploaded images
 
-1. Clone this repo
-2. Run `npm install`
-3. Run `npm start`
-4. You must add your own API key in the `src/App.js` file to connect to Clarifai.
-
-You can grab Clarifai API key [here](https://www.clarifai.com/)
-
-*visist https://zerotomastery.io/ for more*
+1. Register or Signin
+2. Add the image of format `JPEG`, `PNG` etc.
+3. The Clarifai API used will help to return the co-ordinates for the face detected.
+4. The Rank depicts the number of images uploaded by the user.
